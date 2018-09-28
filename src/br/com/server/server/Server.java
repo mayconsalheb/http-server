@@ -13,13 +13,20 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Server {
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Server{
 	
 	public static final int METHOD = 0;
 	public static final int PATH_CONTENT = 1;
 	public static final int PROTOCOL = 2;
 
-	public static void main(String[] args) throws IOException {
+	@EventListener(ApplicationReadyEvent.class)
+	public void run(){
 		ServerSocket server = new ServerSocket(8081);
 		System.out.println("Listenning");
 		
